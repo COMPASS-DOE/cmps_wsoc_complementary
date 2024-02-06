@@ -1,0 +1,53 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_10_Water_60602_Bailey_230413/11/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-15 07:50:14.356 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID 'adf99696-db88-11ed-8e71-b496916cb792'
+       started at 2023-04-15 05:25:59.943 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-15 07:50:14.355 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       D2 03 37 F9 AC 5F 7D ED 05 B5 8B DD 69 AA FE 5B
+>)
+(   2,<2023-04-15 07:50:14.384 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       D2 03 37 F9 AC 5F 7D ED 05 B5 8B DD 69 AA FE 5B>)
+(   3,<2023-04-15 13:02:01.801 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       em LB = 0.75 SI = 256K 
+       data hash MD5: 256K
+       72 98 F3 43 63 FE FE 62 DB 3D 24 4D 4E 5A 3C AF>)
+(   4,<2023-04-15 13:02:01.855 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <ft FT_mod = 6 PKNL = 1 SI = 256K 
+       data hash MD5: 256K
+       CE 37 44 FF 83 A0 2C FF 24 21 C8 FB 1C D4 09 05>)
+(   5,<2023-04-15 13:02:02.765 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk 
+       data hash MD5: 256K
+       35 99 29 DE 07 7D 6C 24 BB 40 1C F0 D9 5F A0 B6>)
+(   6,<2023-04-16 08:07:49.423 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = -23.46045 PHC1 = 23.7625 
+       data hash MD5: 256K
+       8B DB 36 4D 4A 7E 74 08 B9 6F D3 35 46 40 82 81>)
+(   7,<2023-04-17 10:22:04.767 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       TITLE=COMP_10 DOC_CMPS_KFP_0376
+       Water Extracts filtered through 0.45uM filter
+       20uL Chenomx (4.48mM) added to 200uL of extract
+       3mm NMR tube Temp 25C 750MHz (Bokan)
+       Prep: RY and DH
+       Spect: RYTITLE_END
+       data hash MD5: 256K
+       8B DB 36 4D 4A 7E 74 08 B9 6F D3 35 46 40 82 81>)
+##END=
+
+$$ hash MD5
+$$ 80 82 77 ED DB 75 CC 5C B4 1B 9A 1C AD 46 32 21

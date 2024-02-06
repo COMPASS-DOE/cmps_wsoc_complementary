@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PeakList modified="2023-04-14T10:58:07">
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=8.470115ppm, F2=8.434763ppm, MI=0.01cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="8.443278" intensity="0.007245079" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.958903ppm, F2=3.882378ppm, MI=0.00cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="3.934711" intensity="0.00443029" type="0"/>
+    <Peak1D F1="3.898699" intensity="0.004310277" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.775493ppm, F2=3.712693ppm, MI=0.00cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="3.74589" intensity="0.004358012" type="0"/>
+    <Peak1D F1="3.739681" intensity="0.005014799" type="0"/>
+    <Peak1D F1="3.733343" intensity="0.00468217" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.712693ppm, F2=3.381281ppm, MI=0.01cm, MAXI=0.04cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="3.6646" intensity="0.01005188" type="0"/>
+    <Peak1D F1="3.655144" intensity="0.02337388" type="0"/>
+    <Peak1D F1="3.645702" intensity="0.0244719" type="0"/>
+    <Peak1D F1="3.636256" intensity="0.01066012" type="0"/>
+    <Peak1D F1="3.444371" intensity="0.01176569" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.381281ppm, F2=3.364589ppm, MI=1.45cm, MAXI=2.06cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.355440ppm, F2=3.345042ppm, MI=1.73cm, MAXI=1.92cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="3.35186" intensity="1.778831" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.345042ppm, F2=3.262192ppm, MI=1.45cm, MAXI=2.06cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=3.262192ppm, F2=3.062292ppm, MI=0.01cm, MAXI=0.04cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="3.254664" intensity="0.0119071" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=2.956181ppm, F2=2.848880ppm, MI=0.00cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="2.914552" intensity="0.004126938" type="0"/>
+    <Peak1D F1="2.889028" intensity="0.003527432" type="0"/>
+    <Peak1D F1="2.876354" intensity="0.005756985" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=2.462593ppm, F2=2.113832ppm, MI=0.01cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="2.221944" intensity="0.006637166" type="0"/>
+    <Peak1D F1="2.150495" intensity="0.006410465" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=2.113832ppm, F2=1.975085ppm, MI=0.04cm, MAXI=0.87cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="2.061379" intensity="0.701584" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=1.975085ppm, F2=1.959281ppm, MI=0.01cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="1.968207" intensity="0.006210669" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=1.959281ppm, F2=1.888413ppm, MI=0.04cm, MAXI=0.87cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="1.913166" intensity="0.04484641" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=1.888413ppm, F2=1.577931ppm, MI=0.01cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="1.712433" intensity="0.01209071" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=1.475855ppm, F2=0.973979ppm, MI=0.01cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="1.305415" intensity="0.006113248" type="0"/>
+    <Peak1D F1="1.295682" intensity="0.007948904" type="0"/>
+    <Peak1D F1="1.286633" intensity="0.00764042" type="0"/>
+    <Peak1D F1="1.168032" intensity="0.006891711" type="0"/>
+    <Peak1D F1="1.159819" intensity="0.007404317" type="0"/>
+    <Peak1D F1="1.136863" intensity="0.008197939" type="0"/>
+    <Peak1D F1="1.128297" intensity="0.007885939" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=0.973979ppm, F2=0.127595ppm, MI=0.00cm, MAXI=0.01cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="0.894544" intensity="0.00420018" type="0"/>
+    <Peak1D F1="0.884707" intensity="0.00359628" type="0"/>
+    <Peak1D F1="0.853834" intensity="0.00304751" type="0"/>
+    <Peak1D F1="0.582758" intensity="0.004395553" type="0"/>
+    <Peak1D F1="0.151646" intensity="0.004759976" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=0.127595ppm, F2=-0.165874ppm, MI=12.27cm, MAXI=17.66cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="-6.0E-5" intensity="15.0" type="0"/>
+  </PeakList1D>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T10:58:07" expNo="11" name="COMP_02_Water_60602_Bailey_230413" owner="" procNo="2" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=-0.165874ppm, F2=-0.208406ppm, MI=0.04cm, MAXI=0.10cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+  </PeakList1D>
+</PeakList>

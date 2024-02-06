@@ -1,0 +1,89 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_15_Water_60602_Bailey_230413/11/pdata/2/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-15 20:47:51.547 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID '4fd4f4da-dbf5-11ed-9566-b496916cb792'
+       started at 2023-04-15 18:23:37.141 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-15 20:47:51.546 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       8B FC 5A 05 7F 65 1F 1B 01 CA 45 D2 67 E1 79 5F
+>)
+(   2,<2023-04-15 20:47:51.573 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       8B FC 5A 05 7F 65 1F 1B 01 CA 45 D2 67 E1 79 5F>)
+(   3,<2023-04-16 08:22:33.774 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       em LB = 0.75 SI = 256K 
+       data hash MD5: 256K
+       E7 BD 5B 50 09 A9 E6 79 65 DD 02 DF E8 84 BE 5E>)
+(   4,<2023-04-16 08:22:33.831 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <ft FT_mod = 6 PKNL = 1 SI = 256K 
+       data hash MD5: 256K
+       34 7E 27 7B 97 A8 46 27 82 65 C7 16 B4 38 2E CC>)
+(   5,<2023-04-16 08:22:34.659 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk 
+       data hash MD5: 256K
+       FF DB DC 90 D8 BD 07 55 17 0A B3 FB D0 B1 85 38>)
+(   6,<2023-04-16 08:24:06.082 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = -2.129736 PHC1 = 0 
+       data hash MD5: 256K
+       E4 71 F3 02 10 31 17 26 C4 C6 EE B4 9E 84 87 43>)
+(   7,<2023-04-16 08:24:13.348 -0700>,<liquids>,<bokan>,<dirdata>,<TopSpin 3.6.3>,
+      <wrp from 1 11 "COMP_15_Water_60602_Bailey_230413" "/opt/data/nmrdata/60602_Bailey"
+       data hash MD5: 256K
+       E4 71 F3 02 10 31 17 26 C4 C6 EE B4 9E 84 87 43>)
+(   8,<2023-04-16 08:24:44.452 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Unknown data manipulation detected
+       abs ABSG = 0 
+       data hash MD5: 256K
+       53 1C 2B 8B 6C 5E 69 38 83 40 C5 89 1E 6D 4D DC>)
+(   9,<2023-04-16 08:25:06.424 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       TITLE=COMP_15 DOC_CMPS_KFP_0381
+       Water Extracts filtered through 0.45uM filter
+       20uL Chenomx (4.84mM) added to 200uL of extract
+       3mm NMR tube Temp 25C 750MHz (Bokan)
+       Prep: RY and DH
+       Spect: RY
+       MMF: 5 HzTITLE_END
+       data hash MD5: 256K
+       53 1C 2B 8B 6C 5E 69 38 83 40 C5 89 1E 6D 4D DC>)
+(  10,<2023-04-16 08:25:09.563 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       TITLE=COMP_15 DOC_CMPS_KFP_0381
+       Water Extracts filtered through 0.45uM filter
+       20uL Chenomx (4.84mM) added to 200uL of extract
+       3mm NMR tube Temp 25C 750MHz (Bokan)
+       Prep: RY and DH
+       Spect: RY
+       MMF: 5 HzTITLE_END
+       data hash MD5: 256K
+       53 1C 2B 8B 6C 5E 69 38 83 40 C5 89 1E 6D 4D DC>)
+(  11,<2023-04-17 10:24:04.101 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       TITLE=COMP_15 DOC_CMPS_KFP_0381
+       Water Extracts filtered through 0.45uM filter
+       20uL Chenomx (4.48mM) added to 200uL of extract
+       3mm NMR tube Temp 25C 750MHz (Bokan)
+       Prep: RY and DH
+       Spect: RY
+       MMF: 5 HzTITLE_END
+       data hash MD5: 256K
+       53 1C 2B 8B 6C 5E 69 38 83 40 C5 89 1E 6D 4D DC>)
+(  12,<2023-04-17 10:31:45.066 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <abs ABSG = 0 
+       data hash MD5: 256K
+       AE 61 60 3A 93 7A 63 F6 2E E3 DA A3 5F 31 CD 20>)
+##END=
+
+$$ hash MD5
+$$ 43 CE BC 7B 4B DD 55 BA 2B 35 77 42 88 CA 42 D6

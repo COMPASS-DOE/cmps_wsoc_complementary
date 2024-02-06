@@ -1,0 +1,47 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_33_Water_60602_Bailey_230413/11/pdata/2/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-18 01:11:49.251 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID '849730e4-ddac-11ed-914f-b496916cb792'
+       started at 2023-04-17 22:47:34.721 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-18 01:11:49.250 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       84 9E BD E9 E0 58 35 70 DE 70 29 AA D3 0C 16 6B
+>)
+(   2,<2023-04-18 01:11:49.276 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       84 9E BD E9 E0 58 35 70 DE 70 29 AA D3 0C 16 6B>)
+(   3,<2023-04-18 08:18:52.521 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       em LB = 0.75 SI = 256K 
+       data hash MD5: 256K
+       E3 44 81 12 C7 8A 4A 5C F6 83 CB AF 74 FD A9 DC>)
+(   4,<2023-04-18 08:18:52.575 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <ft FT_mod = 6 PKNL = 1 SI = 256K 
+       data hash MD5: 256K
+       64 56 FC 63 B9 47 51 B5 A4 FF 86 3B 7E C5 74 1C>)
+(   5,<2023-04-18 08:18:53.635 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk 
+       data hash MD5: 256K
+       D8 CD 8A C7 CC E5 47 4F 74 69 DA 0F 28 79 34 C8>)
+(   6,<2023-04-18 08:19:14.660 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = -20.92296 PHC1 = 18.09375 
+       data hash MD5: 256K
+       CB 7C 5A 20 84 20 1B E1 22 80 F9 69 29 54 45 4B>)
+(   7,<2023-04-18 08:19:19.033 -0700>,<liquids>,<bokan>,<dirdata>,<TopSpin 3.6.3>,
+      <wrp from 1 11 "COMP_33_Water_60602_Bailey_230413" "/opt/data/nmrdata/60602_Bailey"
+       data hash MD5: 256K
+       CB 7C 5A 20 84 20 1B E1 22 80 F9 69 29 54 45 4B>)
+##END=
+
+$$ hash MD5
+$$ FC FD D0 D5 A7 8F 3B DA EB FD 61 0D B8 83 15 5B

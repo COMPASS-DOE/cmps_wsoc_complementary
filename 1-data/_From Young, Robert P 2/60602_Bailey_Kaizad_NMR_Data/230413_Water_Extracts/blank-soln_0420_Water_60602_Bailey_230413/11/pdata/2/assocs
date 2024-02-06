@@ -1,0 +1,11 @@
+##TITLE= Parameter file, TopSpin 3.6.3
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ 2023-04-26 06:49:15.580 -0700  liquids@bokan
+$$ /opt/data/nmrdata/60602_Bailey/blank-soln_0420_Water_60602_Bailey_230413/11/pdata/2/assocs
+$$ process /opt/topspin3.6.3/prog/mod/dataserver
+##$MULTDISP= </opt/data/nmrdata/60602_Bailey/blank-soln_0393_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/blank-filter_0419_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/blank-filter_0392_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_BL_Chenomx_dDSS_02_60602_Bailey_230413/11/pdata/1|/opt/data/nmrdata/60602_Bailey/COMP_49_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_46_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_30_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_20_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_19_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_14_Water_60602_Bailey_230413/11/pdata/2|/opt/data/nmrdata/60602_Bailey/COMP_01_Water_60602_Bailey_230413/2/pdata/1>
+##END=

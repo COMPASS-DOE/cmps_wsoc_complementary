@@ -1,0 +1,47 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/SPE_H2O_Blank_60602_Bailey_230426/15/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-05-03 10:02:46.295 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID '2d3c840a-e9c0-11ed-808e-b496916cb792'
+       started at 2023-05-03 07:38:32.052 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-05-03 10:02:46.295 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       77 33 07 14 12 C3 2E 1D E2 25 E1 65 7E 91 3A 24
+>)
+(   2,<2023-05-03 10:02:46.321 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       77 33 07 14 12 C3 2E 1D E2 25 E1 65 7E 91 3A 24>)
+(   3,<2023-05-06 15:05:10.848 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       em LB = 0.75 SI = 256K 
+       data hash MD5: 256K
+       67 14 4D 0B FB 88 85 D7 D4 87 C1 DA EC 92 1C 58>)
+(   4,<2023-05-06 15:05:10.900 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <ft FT_mod = 6 PKNL = 1 SI = 256K 
+       data hash MD5: 256K
+       34 D4 AC 26 FC 8D CF 5B E0 53 41 38 73 EC B4 3E>)
+(   5,<2023-05-06 15:05:11.940 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk 
+       data hash MD5: 256K
+       46 2F 09 A2 5E 71 AA 55 19 83 98 C7 13 A6 80 A5>)
+(   6,<2023-05-06 15:05:32.839 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = 31.32907 PHC1 = -43.59375 
+       data hash MD5: 256K
+       52 01 6A 0E 09 FF 86 C1 DC 61 C3 AC A5 32 39 40>)
+(   7,<2023-05-06 15:05:45.152 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = -0.184375 PHC1 = 0 
+       data hash MD5: 256K
+       D2 BF 70 26 7A F7 6B 12 14 6E F4 14 FE 3D 98 AD>)
+##END=
+
+$$ hash MD5
+$$ 99 11 27 41 22 BE AA 9E 48 2C 0A F0 B8 57 7E 88

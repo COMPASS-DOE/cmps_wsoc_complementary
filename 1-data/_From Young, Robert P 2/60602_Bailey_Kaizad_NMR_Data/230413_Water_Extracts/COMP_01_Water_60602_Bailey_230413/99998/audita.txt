@@ -1,0 +1,21 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_01_Water_60602_Bailey_230413/99998/audita.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-14 00:49:17.798 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID 'd5f4c58a-da98-11ed-8889-b496916cb792'
+       started at 2023-04-14 00:49:07.797 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-14 00:49:17.795 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 64K
+       EE 52 44 46 15 65 61 EA 6D A0 6E 2C 0E 4C AC CD
+>)
+##END=
+
+$$ hash MD5
+$$ 0A CE E6 91 96 F2 4D 5F 92 95 06 B3 C7 0C 0E 8C

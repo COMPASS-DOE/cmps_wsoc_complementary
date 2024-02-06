@@ -1,0 +1,11 @@
+##TITLE= Parameter file, TopSpin 3.6.3
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 2	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ 2023-04-18 20:45:46.475 -0700  liquids@bokan
+$$ /opt/data/nmrdata/60602_Bailey/COMP_D2O_Blank01_60602_Bailey_230413/11/pdata/2/assocs
+$$ process /opt/topspin3.6.3/prog/mod/dataserver
+##$MULTDISP= </opt/data/nmrdata/60602_Bailey/COMP_031_Water_60602_Bailey_230413/11/pdata/2>
+##END=
