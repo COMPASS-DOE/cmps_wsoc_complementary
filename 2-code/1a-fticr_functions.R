@@ -567,7 +567,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   
   # PCA biplots
 #  biplot_all = 
-    ggbiplot(pca_overall$pca_int, obs.scale = 1, var.scale = 1,
+    ggbiplot(pca_overall$pca_int, obs.scale = 1, var.scale = 1, varname.size = 5,
              groups = pca_overall$grp$transect, 
              ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
     geom_point(size=3,stroke=1, alpha = 1,
