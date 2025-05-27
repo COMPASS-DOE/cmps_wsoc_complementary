@@ -1,0 +1,9 @@
+TITLE=COMP_D2O_Blank01_60602_Bailey_230413
+Blank D2O
+200uL of D2O
+3mm NMR tube Temp 25C 750MHz (Bokan)
+Prep: RY and DH
+Spect: RY and DH
+
+1D Robust ns1024
+MMF: 5 HzTITLE_END

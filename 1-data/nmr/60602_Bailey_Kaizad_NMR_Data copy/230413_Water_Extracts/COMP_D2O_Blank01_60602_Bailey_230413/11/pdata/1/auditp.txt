@@ -1,0 +1,55 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_D2O_Blank01_60602_Bailey_230413/11/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-17 14:10:09.934 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID '160852e0-dd50-11ed-ae24-b496916cb792'
+       started at 2023-04-17 11:45:55.535 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-17 14:10:09.933 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       54 B5 F6 5D 05 30 DA 17 71 39 E0 B5 CC 69 62 24
+>)
+(   2,<2023-04-17 14:10:09.960 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       54 B5 F6 5D 05 30 DA 17 71 39 E0 B5 CC 69 62 24>)
+(   3,<2023-04-17 15:51:48.813 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       em LB = 0.75 SI = 256K 
+       data hash MD5: 256K
+       71 36 83 29 0A AE 83 2D 31 71 4B F6 55 17 C4 86>)
+(   4,<2023-04-17 15:51:48.866 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <ft FT_mod = 6 PKNL = 1 SI = 256K 
+       data hash MD5: 256K
+       F7 19 6B CF DA EF 6D C3 A2 D7 46 66 A4 52 F0 80>)
+(   5,<2023-04-17 15:51:51.118 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk 
+       data hash MD5: 256K
+       42 10 B8 4A 70 DD 72 FF A1 89 18 E2 FE A3 25 88>)
+(   6,<2023-04-17 15:52:42.681 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <apk0 
+       data hash MD5: 256K
+       27 C7 1C 06 A7 79 25 64 7A AB 6A 04 A6 6C ED 49>)
+(   7,<2023-04-17 15:54:32.358 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = 91.46987 PHC1 = -566.5312 
+       data hash MD5: 256K
+       D1 B3 AD 5D 3C EB 01 63 95 E8 75 4D 89 14 BD 5E>)
+(   8,<2023-04-18 20:47:14.258 -0700>,<liquids>,<bokan>,<dataserver>,<TopSpin 3.6.3>,
+      <Spectrum calibrated, SF was set. Old value: 750.240062 New value: 750.239937. Peak list modified: Yes
+       data hash MD5: 256K
+       D1 B3 AD 5D 3C EB 01 63 95 E8 75 4D 89 14 BD 5E>)
+(   9,<2023-04-18 20:47:14.261 -0700>,<liquids>,<bokan>,<dataserver>,<TopSpin 3.6.3>,
+      <Spectrum calibrated, OFFSET was set. Old value: 14.613770 New value: 14.780986. Peak list modified: Yes
+       data hash MD5: 256K
+       D1 B3 AD 5D 3C EB 01 63 95 E8 75 4D 89 14 BD 5E>)
+##END=
+
+$$ hash MD5
+$$ 02 68 0C B8 2C AF C4 0E FC 0D 9C 7D 05 F9 6D C9

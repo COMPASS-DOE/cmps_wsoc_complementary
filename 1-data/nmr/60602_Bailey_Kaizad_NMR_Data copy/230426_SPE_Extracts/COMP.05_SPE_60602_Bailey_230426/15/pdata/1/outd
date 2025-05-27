@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TopSpin 3.6.3
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ 2023-04-26 22:03:55.965 -0700  liquids@bokan
+$$ /opt/topspin3.6.3/prog/curdir/changer/inmrchanger/Apr13-2023-2123-60602_Bailey/5/5.681/data/nmr/COMP.05_SPE_60602_Bailey_230426/15/pdata/1/outd
+$$ process /opt/topspin3.6.3/prog/mod/xwish3
+##$CURPLOT= <>
+##$CURPRIN= <$>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/1D_H.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##END=

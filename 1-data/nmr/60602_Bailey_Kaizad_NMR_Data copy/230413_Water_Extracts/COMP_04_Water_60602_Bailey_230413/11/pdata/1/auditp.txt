@@ -1,0 +1,45 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_04_Water_60602_Bailey_230413/11/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-14 16:19:41.047 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <created by zg on data set with UUID 'ae98f182-db06-11ed-9f9c-b496916cb792'
+       started at 2023-04-14 13:55:26.413 -0700,
+       POWCHK enabled, PULCHK disabled,
+       completed at 2023-04-14 16:19:41.047 -0700
+
+       configuration hash MD5:
+       72 8C FA FE 29 06 AD 62 D3 CD 3F B9 9F FE 6A 2F
+       data hash MD5: 128K
+       B0 15 82 0C 45 8C A5 E6 33 B3 84 BF 4E 32 32 7C
+>)
+(   2,<2023-04-14 16:19:41.077 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       ICON-NMR User ID: 60602_Bailey
+       data hash MD5: 128K
+       B0 15 82 0C 45 8C A5 E6 33 B3 84 BF 4E 32 32 7C>)
+(   3,<2023-04-16 07:23:34.435 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       efp LB = 0.75 FT_mod = 6 PKNL = 1 PHC0 = -33.65889 PHC1 = 19.5294 SI = 256K 
+       data hash MD5: 256K
+       2E A2 08 1F 78 A1 38 54 5F D2 0A 3B 0E B1 DE F7>)
+(   4,<2023-04-16 07:23:52.814 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <pk fgphup PHC0 = -3.147323 PHC1 = 4.325 
+       data hash MD5: 256K
+       23 84 48 84 9A 73 D0 6F C5 88 D1 F2 9C 9A FB 58>)
+(   5,<2023-04-17 10:19:15.139 -0700>,<liquids>,<bokan>,<audit>,<TopSpin 3.6.3>,
+      <user comment:
+       TITLE=COMP_04 DOC_CMPS_KFP_0370
+       Water Extracts filtered through 0.45uM filter
+       20uL Chenomx (4.48mM) added to 200uL of extract
+       3mm NMR tube Temp 25C 750MHz (Bokan)
+       Prep: RY and DH
+       Spect: RYTITLE_END
+       data hash MD5: 256K
+       23 84 48 84 9A 73 D0 6F C5 88 D1 F2 9C 9A FB 58>)
+##END=
+
+$$ hash MD5
+$$ 01 1C 1F 89 69 FA 9B 5E 21 F0 B1 C9 FB D9 1D 7D

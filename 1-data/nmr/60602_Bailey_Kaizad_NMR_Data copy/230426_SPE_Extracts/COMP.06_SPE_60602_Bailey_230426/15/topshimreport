@@ -1,0 +1,51 @@
+
+New TopShim run:
+
+version = topshim 2.0.0
+date = 2023-04-27
+time = 05:51:42.542
+command = topshim  ss z6 tunebz tunea
+
+1D SHIMMING
+
+Parameters:
+
+maximum order = 6
+probe = Z151345_0001
+solvent = D2O_3mm
+shim nucleus = 2H
+nucleus optimised for = 1H
+o1p (from lock) = 4.70 ppm
+selective excitation width = 1.0 ppm
+linewidth 1H = 0.20 Hz
+envelope shape / strictness = 1.75 / 500
+
+Results:
+
+tune lock level increase = 3.3
+
+initial B0 stdDev = 0.69 Hz
+sample size = 2.92 cm, position = -0.00 cm
+final B0 stdDev = 0.19 Hz > improvement = 3.6
+envelope width = 0.58 Hz
+
+Performing tune after shimming
+tune lock level increase = 1.0
+
+shim changes: 
+Z	+260
+Z2	+14
+Z3	+67
+Z4	+12
+Z5	+59
+Z6	+270
+X	-34
+XZ	-126
+Y	+23
+
+duration = 7 min 4 sec
+completed successfully
+finished Thu Apr 27 05:58:45 2023
+
+
+========================================================================

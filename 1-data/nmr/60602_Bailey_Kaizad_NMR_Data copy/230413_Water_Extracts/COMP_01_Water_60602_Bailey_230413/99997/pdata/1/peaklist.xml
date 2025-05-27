@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PeakList>
+  <PeakList1D>
+    <PeakList1DHeader creator="liquids" date="2023-04-14T00:49:17.905-07:00" expNo="99997" name="COMP_01_Water_60602_Bailey_230413" owner="" procNo="1" source="/opt/data/nmrdata/60602_Bailey">
+      <PeakPickDetails>F1=5.000000ppm, F2=4.500000ppm, MI=0.10cm, MAXI=10000.00cm, PC=1.000
+      </PeakPickDetails>
+    </PeakList1DHeader>
+    <Peak1D F1="4.902418" intensity="1.344276e-01" type="0"/>
+    <Peak1D F1="4.895728" intensity="1.375674e-01" type="0"/>
+    <Peak1D F1="4.857148" intensity="1.705453e-01" type="0"/>
+    <Peak1D F1="4.773548" intensity="3.560249e-01" type="0"/>
+    <Peak1D F1="4.743896" intensity="5.340821e-01" type="0"/>
+    <Peak1D F1="4.741267" intensity="5.724335e-01" type="0"/>
+    <Peak1D F1="4.707535" intensity="2.886739e+00" type="0"/>
+    <Peak1D F1="4.706190" intensity="2.903196e+00" type="0"/>
+    <Peak1D F1="4.696121" intensity="1.500000e+01" type="0"/>
+    <Peak1D F1="4.654484" intensity="6.395012e-01" type="0"/>
+    <Peak1D F1="4.621502" intensity="3.674978e-01" type="0"/>
+  </PeakList1D>
+</PeakList>

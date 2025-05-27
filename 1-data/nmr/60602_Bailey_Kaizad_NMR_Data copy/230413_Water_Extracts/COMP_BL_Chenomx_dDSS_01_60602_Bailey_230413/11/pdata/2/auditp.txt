@@ -1,0 +1,42 @@
+##TITLE= Audit trail, TopSpin 3.6.3
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= liquids
+$$ /opt/data/nmrdata/60602_Bailey/COMP_BL_Chenomx_dDSS_01_60602_Bailey_230413/11/pdata/2/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2023-04-17 14:21:22.327 -0700>,<liquids>,<bokan>,<go4>,<TopSpin 3.6.3>,
+      <acquisition in progress>)
+(   2,<2023-04-17 16:00:54.797 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Start of raw data processing
+       efp LB = 0.75 FT_mod = 6 PKNL = 1 PHC0 = -37.86588 PHC1 = 27.875 SI = 256K 
+       data hash MD5: 256K
+       29 B0 A4 AC 81 17 0E 76 B9 2E 6A 6D 59 5A 6B 74>)
+(   3,<2023-04-17 17:26:21.038 -0700>,<liquids>,<bokan>,<dirdata>,<TopSpin 3.6.3>,
+      <wrp from 1 11 "COMP_BL_Chenomx_dDSS_01_60602_Bailey_230413" "/opt/data/nmrdata/60602_Bailey"
+       data hash MD5: 256K
+       29 B0 A4 AC 81 17 0E 76 B9 2E 6A 6D 59 5A 6B 74>)
+(   4,<2023-04-17 17:26:53.652 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <Unknown data manipulation detected
+       abs ABSG = 0 
+       data hash MD5: 256K
+       5D 2E 05 26 DC 17 4B B5 BC 03 66 5F 1B AE 3D 99>)
+(   5,<2023-04-18 06:17:56.395 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <abs ABSG = 0 
+       data hash MD5: 256K
+       24 16 E0 28 EF 5F F0 B2 E3 A7 15 B8 43 EE 0A 83>)
+(   6,<2023-04-18 20:44:07.500 -0700>,<liquids>,<bokan>,<proc1d>,<TopSpin 3.6.3>,
+      <abs ABSG = 0 
+       data hash MD5: 256K
+       18 77 6F B1 E6 FC 55 49 C5 E6 0D BE 0E 07 AF FB>)
+(   7,<2023-04-19 05:47:41.124 -0700>,<liquids>,<bokan>,<dataserver>,<TopSpin 3.6.3>,
+      <Spectrum calibrated, SF was set. Old value: 750.240000 New value: 750.232448. Peak list modified: Yes
+       data hash MD5: 256K
+       18 77 6F B1 E6 FC 55 49 C5 E6 0D BE 0E 07 AF FB>)
+(   8,<2023-04-19 05:47:41.127 -0700>,<liquids>,<bokan>,<dataserver>,<TopSpin 3.6.3>,
+      <Spectrum calibrated, OFFSET was set. Old value: 4.700000 New value: 14.766547. Peak list modified: Yes
+       data hash MD5: 256K
+       18 77 6F B1 E6 FC 55 49 C5 E6 0D BE 0E 07 AF FB>)
+##END=
+
+$$ hash MD5
+$$ DF CB 18 9D 58 52 DF 9B 52 2B 23 F5 1E 70 20 75

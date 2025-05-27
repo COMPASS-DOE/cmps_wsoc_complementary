@@ -1,0 +1,6 @@
+TITLE=COMP_11 DOC_CMPS_KFP_0377
+Water Extracts filtered through 0.45uM filter
+20uL Chenomx (4.48mM) added to 200uL of extract
+3mm NMR tube Temp 25C 750MHz (Bokan)
+Prep: RY and DH
+Spect: RYTITLE_END
