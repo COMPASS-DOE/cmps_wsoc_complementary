@@ -1,4 +1,11 @@
 library(tidyverse)
+library(nmrrr)
+library(vegan)
+library(googlesheets4)
+library(ggbiplot)
+library(PNWColors)
+library(ggConvexHull)
+#devtools::install_github("cmartin/ggConvexHull")
 
 theme_kp <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
