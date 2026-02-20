@@ -15,7 +15,7 @@ icr_process_metadata = function(icr_report_negative, icr_report_positive){
     bind_rows(meta_positive %>% mutate(mode = "positive")) %>% 
     group_by(formula) %>% 
     mutate(n = n()) %>% 
-    mutate(mode = case_when(n == 2 ~ "both", TRUE ~ mode)) %>% 
+    mutate(mode = case_when(n == 2 ~ "negative, positive", TRUE ~ mode)) %>% 
     distinct()
 }
 
