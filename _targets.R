@@ -14,6 +14,8 @@ tar_option_set(
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source("2-code/0-packages.R")
+tar_source("2-code/1a-fticr_functions.R")
+tar_source("2-code/1b-fticr_data.R")
 tar_source("2-code/2-nmr.R")
 # tar_source("other_functions.R") # Source other scripts as needed.
 
@@ -36,7 +38,17 @@ list(
   
   ## stats
   tar_target(nmr_permanova, compute_nmr_permanova(nmr_relabundance, sample_key)),
-  tar_target(nmr_pca, compute_nmr_pca(nmr_relabundance, sample_key))
+  tar_target(nmr_pca, compute_nmr_pca(nmr_relabundance, sample_key)),
+  
+  # FTICR
+  ## processing
+  tar_target(icr_report_positive, read.csv("1-data/fticr/DOC 367-420 Positive Report.csv")),
+  tar_target(icr_report_negative, read.csv("1-data/fticr/DOC 367-420 Negative Report.csv")),
+  tar_target(icr_metadata, icr_process_metadata(icr_report_negative, icr_report_positive)),
+  tar_target(icr_data_trt, icr_process_data_trt(icr_report_negative, icr_report_positive, sample_key)),
+  tar_target(icr_data_cores, icr_process_data_cores(icr_report_negative, icr_report_positive, sample_key)),
+  
+  tar_target(icr_relabundance, compute_icr_relabund(icr_data_cores, icr_metadata))
 
 )
 

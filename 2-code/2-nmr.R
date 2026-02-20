@@ -168,7 +168,7 @@ compute_nmr_permanova = function(nmr_relabundance, sample_key){
   
   
   permanova = 
-    adonis(relabund_wide %>% dplyr::select(where(is.numeric))  ~ (site + transect_location + horizon)^2,
+    adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ (site + transect_location + horizon)^2,
            data = relabund_wide)
   
   broom::tidy(permanova$aov.tab)

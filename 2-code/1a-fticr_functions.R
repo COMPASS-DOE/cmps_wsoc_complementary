@@ -71,7 +71,7 @@ apply_replication_filter = function(data_long_key, ...){
     data_long_key %>% 
     ungroup() %>% 
     group_by(...) %>% 
-    distinct(sample_label) %>% 
+    distinct(sample_name) %>% 
     dplyr::summarise(reps = n())
   
   # second, join the `reps` file to the long_key file
@@ -142,12 +142,12 @@ make_fticr_data = function(icr_report, sample_key){
   data_long_key_repfiltered = 
     data_long_key %>% 
     filter(!is.na(region)) %>% 
-    apply_replication_filter(., region, site, transect, horizon)
+    apply_replication_filter(., region, site, transect_location, horizon)
   
   # blanks - filter and solution
   blanks = 
     data_long_key %>% 
-    filter(grepl("blank", sample_label))
+    filter(grepl("blank", sample_name))
   
   # instrument blanks - raw blanks, etc.
   instrument_blanks = 
@@ -169,7 +169,7 @@ make_fticr_data = function(icr_report, sample_key){
   # get summary of peaks by treatment
   data_long_trt = 
     data_long_blank_corrected %>% 
-    distinct(formula, region, site, transect, horizon)
+    distinct(formula, region, site, transect_location, horizon)
   
   list(data_long_trt = data_long_trt,
        data_long_blank_corrected = data_long_blank_corrected)
@@ -211,13 +211,13 @@ plot_vankrevelen = function(icr_data_trt, icr_meta){
     icr_data_trt %>% 
     filter(horizon != "B") %>% 
     left_join(icr_meta %>% dplyr::select(formula, HC, OC)) %>% 
-    mutate(transect = recode(transect, "wc" = "wetland")) %>% 
+    mutate(transect_location = recode(transect_location, "wc" = "wetland")) %>% 
     reorder_horizon() %>% reorder_transect()
   
   vk_wle = 
     data_hcoc %>% 
     filter(region == "WLE") %>% 
-    gg_vankrev(aes(x = OC, y = HC, color = transect))+
+    gg_vankrev(aes(x = OC, y = HC, color = transect_location))+
     stat_ellipse(level = 0.90, show.legend = F)+
     scale_color_manual(values = pal_transect)+
     labs(color = "",
@@ -230,7 +230,7 @@ plot_vankrevelen = function(icr_data_trt, icr_meta){
   vk_cb = 
     data_hcoc %>% 
     filter(region == "CB" ) %>% 
-    gg_vankrev(aes(x = OC, y = HC, color = transect))+
+    gg_vankrev(aes(x = OC, y = HC, color = transect_location))+
     stat_ellipse(level = 0.90, show.legend = F)+
     scale_color_manual(breaks = c("upland", "transition", "wte", "wetland"),
                        values = pal_transect)+
@@ -257,14 +257,14 @@ plot_vankrevelen_unique = function(icr_data_trt, icr_meta){
     dplyr::mutate(n = n()) %>% 
     filter(n == 1) %>% 
     left_join(icr_meta %>% dplyr::select(formula, HC, OC)) %>% 
-    mutate(transect = recode(transect, "wc" = "wetland")) %>% 
+    mutate(transect_location = recode(transect_location, "wc" = "wetland")) %>% 
     reorder_horizon() %>% reorder_transect()
   
   
   vk_unique_wle = 
     unique_hcoc %>% 
     filter(region == "WLE") %>% 
-    gg_vankrev(aes(x = OC, y = HC, color = transect))+
+    gg_vankrev(aes(x = OC, y = HC, color = transect_location))+
     stat_ellipse(level = 0.90, show.legend = F)+
     scale_color_manual(breaks = c("upland", "transition", "wte", "wetland"),
                        values = pal_transect)+
@@ -278,7 +278,7 @@ plot_vankrevelen_unique = function(icr_data_trt, icr_meta){
   vk_unique_cb = 
     unique_hcoc %>% 
     filter(region == "CB") %>% 
-    gg_vankrev(aes(x = OC, y = HC, color = transect))+
+    gg_vankrev(aes(x = OC, y = HC, color = transect_location))+
     stat_ellipse(level = 0.90, show.legend = F)+
     scale_color_manual(breaks = c("upland", "transition", "wte", "wetland"),
                        values = pal_transect)+
@@ -305,12 +305,12 @@ compute_icr_relabund = function(icr_data_long, icr_meta){
     # add the Class column to the data
     left_join(dplyr::select(icr_meta, formula, Class), by = "formula") %>% 
     # calculate abundance of each Class as the sum of all counts
-    group_by(sample_label, Class) %>%
+    group_by(sample_name, mode, Class) %>%
     dplyr::summarise(abund = sum(presence)) %>%
     ungroup %>% 
     # create a new column for total counts per core assignment
     # and then calculate relative abundance  
-    group_by(sample_label) %>% 
+    group_by(mode, sample_name) %>% 
     dplyr::mutate(total = sum(abund),
                   relabund  = ((abund/total)*100))
 }
@@ -319,27 +319,27 @@ compute_icr_relabund = function(icr_data_long, icr_meta){
 
 ## fticr_relabund_per_sample %>%
 ##   left_join(sample_key) %>% 
-##   ggplot(aes(x = sample_label, y = relabund, fill = Class))+
+##   ggplot(aes(x = sample_name, y = relabund, fill = Class))+
 ##   geom_bar(stat = "identity")+
 ##   facet_wrap(~region, scales = "free_x")
 
 ## fticr_relabund_per_sample %>%
 ##   left_join(sample_key) %>% 
 ##   filter(region == "CB" & horizon != "B") %>% 
-##   ggplot(aes(x = sample_label, y = relabund, fill = Class))+
+##   ggplot(aes(x = sample_name, y = relabund, fill = Class))+
 ##   geom_bar(stat = "identity")+
-##   facet_wrap(~site + transect, scales = "free_x")
+##   facet_wrap(~site + transect_location, scales = "free_x")
 
 ## fticr_relabund_per_sample %>%
 ##   left_join(sample_key) %>% 
 ##   filter(region == "WLE" & horizon != "B") %>% 
-##   ggplot(aes(x = sample_label, y = relabund, fill = Class))+
+##   ggplot(aes(x = sample_name, y = relabund, fill = Class))+
 ##   geom_bar(stat = "identity")+
-##   facet_wrap(~site + transect, scales = "free_x")
+##   facet_wrap(~site + transect_location, scales = "free_x")
 
 
 ## y = fticr_relabund_per_sample %>% 
-##   group_by(sample_label) %>% 
+##   group_by(sample_name) %>% 
 ##   dplyr::summarise(total2 = sum(relabund))## 
 
 
@@ -383,7 +383,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   
   sample_key = 
     sample_key %>% 
-    mutate(transect = recode(transect, "wc" = "wetland"))
+    mutate(transect_location = recode(transect_location, "wc" = "wetland"))
   
   pca_overall = fit_pca_function_icr(icr_relabund_samples, sample_key)
   pca_wle = fit_pca_function_icr(icr_relabund_samples, sample_key %>% filter(region == "WLE"))
@@ -396,7 +396,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
              groups = pca_overall$grp$region, 
              ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
     geom_point(size=3,stroke=1, alpha = 1,
-               aes(shape = pca_overall$grp$transect,
+               aes(shape = pca_overall$grp$transect_location,
                    color = groups))+
     scale_shape_manual(breaks = c("upland", "transition", "wte", "wetland"),
                        values = c(1,2,3,4))+
@@ -409,7 +409,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   
   biplot_wle = 
     ggbiplot(pca_wle$pca_int, obs.scale = 1, var.scale = 1,
-             groups = pca_wle$grp$transect, 
+             groups = pca_wle$grp$transect_location, 
              ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
     geom_point(size=3,stroke=1, alpha = 1,
                aes(shape = pca_wle$grp$site,
@@ -427,7 +427,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   
   biplot_cb = 
     ggbiplot(pca_cb$pca_int, obs.scale = 1, var.scale = 1,
-             groups = pca_cb$grp$transect, 
+             groups = pca_cb$grp$transect_location, 
              ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
     geom_point(size=3,stroke=1, alpha = 1,
                aes(shape = pca_cb$grp$site,
@@ -465,7 +465,7 @@ compute_permanova = function(icr_relabund_samples){
     replace(.,is.na(.),0)
   
   permanova_fticr_all = 
-    adonis(relabund_wide %>% dplyr::select(where(is.numeric)) ~ (region + transect + site + horizon)^2, 
+    adonis(relabund_wide %>% dplyr::select(where(is.numeric)) ~ (region + transect_location + site + horizon)^2, 
            data = relabund_wide)
   broom::tidy(permanova_fticr_all$aov.tab)
 }
@@ -494,20 +494,6 @@ gg_vankrev <- function(data,mapping){
 }
 
 
-compute_relabund_cores = function(data_longform, meta_combined){
-  data_longform %>% 
-    # add the Class column to the data
-    left_join(dplyr::select(meta_combined, formula, Class), by = "formula") %>% 
-    # calculate abundance of each Class as the sum of all counts
-    group_by(sample_label, sample_type, region, site, transect, horizon, Class) %>%
-    dplyr::summarise(abund = sum(presence)) %>%
-    ungroup %>% 
-    # create a new column for total counts per core assignment
-    # and then calculate relative abundance  
-    group_by(sample_label) %>% 
-    dplyr::mutate(total = sum(abund),
-                  relabund  = round((abund/total)*100,2))
-}
 plot_relabund = function(relabund_cores, TREATMENTS){
   relabund_trt = 
     relabund_cores %>% 
@@ -519,9 +505,9 @@ plot_relabund = function(relabund_cores, TREATMENTS){
     mutate(Class = factor(Class, levels = c("aliphatic", "unsaturated/lignin", "aromatic", "condensed aromatic")))
   
   relabund_trt %>% 
-    ggplot(aes(x = sample_label, y = rel_abund, fill = Class))+
+    ggplot(aes(x = sample_name, y = rel_abund, fill = Class))+
     geom_bar(stat = "identity")+
-    facet_wrap(~region + transect + horizon, scales = "free_x")
+    facet_wrap(~region + transect_location + horizon + mode, scales = "free_x")
 #    theme_kp()
 }
 
@@ -559,7 +545,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   
   sample_key = 
     sample_key %>% 
-    mutate(transect = recode(transect, "wc" = "wetland"))
+    mutate(transect_location = recode(transect_location, "wc" = "wetland"))
   
   pca_overall = fit_pca_function_icr(icr_relabund_samples = relabund_cores_pos %>% filter(horizon != "B"), 
                                      sample_key)
@@ -568,7 +554,7 @@ compute_icr_pca = function(icr_relabund_samples, sample_key){
   # PCA biplots
 #  biplot_all = 
     ggbiplot(pca_overall$pca_int, obs.scale = 1, var.scale = 1, varname.size = 5,
-             groups = pca_overall$grp$transect, 
+             groups = pca_overall$grp$transect_location, 
              ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
     geom_point(size=3,stroke=1, alpha = 1,
                aes(shape = pca_overall$grp$region,
@@ -600,7 +586,7 @@ compute_permanova = function(icr_relabund_samples){
     replace(.,is.na(.),0)
   
   permanova_fticr_all = 
-    adonis(relabund_wide %>% dplyr::select(where(is.numeric)) ~ (region + transect + site + horizon)^2, 
+    adonis(relabund_wide %>% dplyr::select(where(is.numeric)) ~ (region + transect_location + site + horizon)^2, 
            data = relabund_wide)
   broom::tidy(permanova_fticr_all$aov.tab)
 }
