@@ -49,7 +49,9 @@ list(
   tar_target(icr_data_cores, icr_process_data_cores(icr_report_negative, icr_report_positive, sample_key)),
   
   tar_target(icr_relabundance, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance),
-  tar_target(icr_relabundance_wide, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance_wide)
+  tar_target(icr_relabundance_wide, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance_wide),
+  
+  tar_render(report, path = "3-reports/report.Rmd")
 
 )
 
