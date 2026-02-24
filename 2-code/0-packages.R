@@ -6,6 +6,7 @@ library(ggbiplot)
 library(PNWColors)
 library(ggConvexHull)
 #devtools::install_github("cmartin/ggConvexHull")
+library(whistledown)
 
 theme_kp <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
