@@ -167,11 +167,12 @@ compute_nmr_permanova = function(nmr_relabundance, sample_key){
     filter(horizon != "B")
   
   
-  permanova = 
-    adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ (site + transect_location + horizon)^2,
-           data = relabund_wide)
-  
-  broom::tidy(permanova$aov.tab)
+#  permanova = 
+    adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ 
+              (site + transect_location + horizon),
+            by = "margin",
+            data = relabund_wide) %>% 
+    broom::tidy()
   
 }
 compute_nmr_pca = function(nmr_relabundance, sample_key){
@@ -226,4 +227,6 @@ compute_nmr_pca = function(nmr_relabundance, sample_key){
     guides(fill = guide_legend(override.aes = list(shape = 21)))
     
 
-  }
+}
+
+options(scipen = 9999)
