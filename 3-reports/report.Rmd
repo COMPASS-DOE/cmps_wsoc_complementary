@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 
 ```{r}
+source("2-code/0-packages.R")
 targets::tar_load_everything()
 ```
 
@@ -46,6 +47,8 @@ icr_metadata %>%
   theme_kp()+
   facet_wrap(~mode)
 
+
+print("unique + vs - mode")
 icr_metadata %>% 
   filter(mode == "negative, positive") %>% 
   ggplot(aes(x = OC, y = HC))+
@@ -68,7 +71,7 @@ icr_metadata %>%
 
 ```
 
-
+All identified peaks across the different samples
 
 ```{r icr_vk, fig.width=12, fig.height=9}
 
@@ -313,7 +316,8 @@ mds_positive %>%
   #                alpha = 0.8)+
   #  
   geom_point()+
-  labs(title = "NMDS, positive mode")
+  labs(title = "NMDS, positive mode")+
+  theme(legend.position = "right")
 #  scale_shape_manual(values = c(21, 22, 23))+
 #  scale_fill_manual(values = pnw_palette("Bay", 5))+
 # guides(fill = guide_legend(override.aes = list(shape = 21)))
@@ -333,7 +337,9 @@ mds_negative %>%
   #                alpha = 0.8)+
   
   geom_point()+
-  labs(title = "NMDS, negative mode")
+  labs(title = "NMDS, negative mode")+
+  theme(legend.position = "right")
+
 #  scale_shape_manual(values = c(21, 22, 23))+
 #  scale_fill_manual(values = pnw_palette("Bay", 5))+
 # guides(fill = guide_legend(override.aes = list(shape = 21)))
@@ -343,7 +349,7 @@ mds_negative %>%
 
 ### RELATIVE ABUNDANCE
 
-```{r icr_relabund, fig.width=12}
+```{r icr_relabund, fig.width=12, fig.height=12}
 library(ggh4x)
 
 icr_relabundance_summary = 
@@ -359,6 +365,158 @@ icr_relabundance_summary %>%
 ```
 
 
+
+
+---
+
+## NMR
+
+We did NMR on (a) water extracts and (b) SPExtracts
+
+
+### Example NMR spectra 
+
+One example spectrum per transect location
+
+```{r, fig.width=12}
+
+print("WATER EXTRACTS")
+gg_nmr_water_spectra_subset
+
+print("SPE EXTRACTS")
+gg_nmr_spe_spectra_subset
+
+```
+
+
+### PERMANOVA
+
+```{r}
+
+nmr_relabundance_combined = 
+  nmr_water_relabundance %>% 
+  mutate(extraction = "water") %>% 
+  bind_rows(nmr_spe_relabundance %>% mutate(extraction = "SPE"))
+
+
+  relabund_wide = pivot_wider(nmr_relabundance_combined, names_from = "group", values_from = "relabund") %>% 
+    left_join(sample_key, by = c("sampleID" = "sample_name")) %>% 
+    filter(horizon != "B")
+  
+  
+  adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ 
+            (extraction + site + transect_location + horizon),
+          by = "margin",
+          data = relabund_wide) %>% 
+    knitr::kable()
+    
+```
+
+When analyzing WATER and SPE extracts together, the extraction type contributed to 69% of total variability.
+
+
+
+
+```{r}
+print("WATER EXTRACTS")
+nmr_water_permanova %>% 
+  knitr::kable()
+
+print("SPE EXTRACTS")
+nmr_spe_permanova %>% 
+  knitr::kable()
+```
+
+For WATER extracts, transect location accounted for only 10% of total variability.
+
+For SPE extracts, transect location accounted for 41% of total variability.
+
+
+
+
+### PCA 
+
+Plotting WATER and SPE extracts together
+
+```{r}
+  fit_pca_function = function(dat){
+    relabund_pca=
+      dat %>% 
+      ungroup %>% 
+      #  dplyr::select(-c(abund, total)) %>% 
+      #  spread(Class, relabund) %>% 
+      #  replace(.,is.na(.),0)  %>% 
+      dplyr::select(-1)
+    
+    num = 
+      relabund_pca %>% 
+      dplyr::select(where(is.numeric))
+    
+    grp = 
+      relabund_pca %>% 
+      dplyr::select(-where(is.numeric)) %>% 
+      dplyr::mutate(row = row_number())
+    
+    pca_int = prcomp(num, scale. = T)
+    
+    list(num = num,
+         grp = grp,
+         pca_int = pca_int)
+  }
+
+pca = fit_pca_function(relabund_wide)
+
+  ## plot PCA
+  ggbiplot(pca$pca_int, obs.scale = 1, var.scale = 1,
+           groups = as.character(pca$grp$extraction), 
+           ellipse = FALSE, circle = FALSE, 
+           var.axes = TRUE, alpha = 0) +
+    geom_convexhull(aes(group = groups), 
+                    alpha = 0.2)+
+    geom_point(#size = 5,
+               stroke = 1, #alpha = 0.5,
+               aes(shape = as.character(pca$grp$site),
+                   fill = as.character(pca$grp$transect_location),
+                   size = groups))+
+    labs(shape = "Site",
+         fill = "transect",
+         title = "Surface horizons only")+
+    scale_shape_manual(values = c(21, 23))+
+    scale_fill_manual(values = pnw_palette("Bay", 3))+
+    guides(fill = guide_legend(override.aes = list(shape = 21)))+
+    theme(legend.position = "right")
+
+```
+
+Separation was primarily along SPE vs. WATER extraction types. 
+
+
+
+```{r}
+print("WATER EXTRACTS")
+nmr_water_pca
+
+print("SPE EXTRACTS")
+nmr_spe_pca
+
+```
+
+
+### relative abundance
+
+```{r, fig.height=15, fig.width=15}
+print("WATER EXTRACTS")
+gg_nmr_water_relabund
+
+
+print("SPE EXTRACTS")
+gg_nmr_spe_relabund
+
+```
+
+
+- water extracts more variable. more aliphatic
+- SPE extracts less variable. more unsaturated
 
 ---
 
