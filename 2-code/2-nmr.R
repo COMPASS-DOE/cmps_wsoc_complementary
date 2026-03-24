@@ -34,22 +34,22 @@ plot_nmr_spectra_all = function(nmr_spectra_processed){
   
   msm_u_o = 
     nmr_spectra_processed %>% 
-    filter(site == "MSM" & transect_location == "upland" & horizon == "O") %>% 
+    filter(site == "MSM" & transect_location == "upland" & horizon == "surface") %>% 
     plot_spectra_indiv(.)
   
   msm_u_b = 
     nmr_spectra_processed %>% 
-    filter(site == "MSM" & transect_location == "upland" & horizon == "B") %>% 
+    filter(site == "MSM" & transect_location == "upland" & horizon == "subsurface") %>% 
     plot_spectra_indiv(.)
   
   msm_t_o = 
     nmr_spectra_processed %>% 
-    filter(site == "MSM" & transect_location == "transition" & horizon == "O") %>% 
+    filter(site == "MSM" & transect_location == "transition" & horizon == "surface") %>% 
     plot_spectra_indiv(.)
   
   msm_t_b = 
     nmr_spectra_processed %>% 
-    filter(site == "MSM" & transect_location == "transition" & horizon == "B") %>% 
+    filter(site == "MSM" & transect_location == "transition" & horizon == "subsurface") %>% 
     plot_spectra_indiv(.)
   
   msm_w = 
@@ -59,22 +59,22 @@ plot_nmr_spectra_all = function(nmr_spectra_processed){
   
   owc_u_a = 
     nmr_spectra_processed %>% 
-    filter(site == "OWC" & transect_location == "upland" & horizon == "A") %>% 
+    filter(site == "OWC" & transect_location == "upland" & horizon == "surface") %>% 
     plot_spectra_indiv(.)
   
   owc_u_b = 
     nmr_spectra_processed %>% 
-    filter(site == "OWC" & transect_location == "upland" & horizon == "B") %>% 
+    filter(site == "OWC" & transect_location == "upland" & horizon == "subsurface") %>% 
     plot_spectra_indiv(.)
   
   owc_t_a = 
     nmr_spectra_processed %>% 
-    filter(site == "OWC" & transect_location == "transition" & horizon == "A") %>% 
+    filter(site == "OWC" & transect_location == "transition" & horizon == "surface") %>% 
     plot_spectra_indiv(.)
   
   owc_t_b = 
     nmr_spectra_processed %>% 
-    filter(site == "OWC" & transect_location == "transition" & horizon == "B") %>% 
+    filter(site == "OWC" & transect_location == "transition" & horizon == "subsurface") %>% 
     plot_spectra_indiv(.)
   
   owc_w = 
@@ -155,7 +155,7 @@ plot_nmr_relabund = function(nmr_relabundance, sample_key){
     left_join(sample_key, by = c("sampleID" = "sample_name")) %>% 
     ggplot(aes(x = sampleID, y = relabund, fill = group))+
     geom_bar(stat = "identity")+
-    facet_wrap(~site + transect_location + horizon, scale = "free_x")
+    facet_nested(horizon ~site + transect_location, scale = "free_x")
   
 }
 
@@ -164,12 +164,12 @@ compute_nmr_permanova = function(nmr_relabundance, sample_key){
   
   relabund_wide = pivot_wider(nmr_relabundance, names_from = "group", values_from = "relabund") %>% 
     left_join(sample_key, by = c("sampleID" = "sample_name")) %>% 
-    filter(horizon != "B")
+    filter(horizon != "subsurface")
   
   
 #  permanova = 
     adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ 
-              (site + transect_location + horizon),
+              (site + transect_location),
             by = "margin",
             data = relabund_wide) %>% 
     broom::tidy()
@@ -205,7 +205,7 @@ compute_nmr_pca = function(nmr_relabundance, sample_key){
   relabund_wide = 
     pivot_wider(nmr_relabundance, names_from = "group", values_from = "relabund") %>% 
     left_join(sample_key, by = c("sampleID" = "sample_name")) %>% 
-    filter(horizon != "B")
+    filter(horizon != "subsurface")
   
   pca = fit_pca_function(relabund_wide)
   
