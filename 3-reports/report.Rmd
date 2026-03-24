@@ -106,7 +106,7 @@ adonis2(icr_relabundance_wide %>% filter(mode == "negative") %>%
         data = icr_relabundance_wide %>% filter(mode == "negative")) %>% 
   knitr::kable()
 ```
-For negative mode, region accounted for 31 % and transect 25 % of total variability.
+For negative mode, region accounted for 66 % and transect 25 % of total variability.
 
 
 ```{r}
@@ -117,7 +117,7 @@ adonis2(icr_relabundance_wide %>% filter(mode == "positive") %>%
         data = icr_relabundance_wide %>% filter(mode == "positive")) %>% 
   knitr::kable()
 ```
-For positive mode, region accounted for 18 % and transect 23 % of total variability.
+For positive mode, region accounted for 34 % and transect 23 % of total variability.
 
 
 
@@ -401,11 +401,11 @@ nmr_relabundance_combined =
 
   relabund_wide = pivot_wider(nmr_relabundance_combined, names_from = "group", values_from = "relabund") %>% 
     left_join(sample_key, by = c("sampleID" = "sample_name")) %>% 
-    filter(horizon != "B")
+    filter(horizon != "subsurface")
   
   
   adonis2(relabund_wide %>% dplyr::select(where(is.numeric))  ~ 
-            (extraction + site + transect_location + horizon),
+            (extraction + site + transect_location),
           by = "margin",
           data = relabund_wide) %>% 
     knitr::kable()
@@ -427,9 +427,9 @@ nmr_spe_permanova %>%
   knitr::kable()
 ```
 
-For WATER extracts, transect location accounted for only 10% of total variability.
+For WATER extracts, site accounted for 38% and transect location accounted for only 10% of total variability.
 
-For SPE extracts, transect location accounted for 41% of total variability.
+For SPE extracts, site accounted for 14% and transect location accounted for 41% of total variability.
 
 
 
@@ -504,6 +504,8 @@ nmr_spe_pca
 
 ### relative abundance
 
+
+PLOTTING ALL REPLICATES
 ```{r, fig.height=15, fig.width=15}
 print("WATER EXTRACTS")
 gg_nmr_water_relabund
@@ -514,9 +516,31 @@ gg_nmr_spe_relabund
 
 ```
 
-
 - water extracts more variable. more aliphatic
 - SPE extracts less variable. more unsaturated
+
+
+PLOTTING SUMMARIES
+
+```{r, fig.width=15, fig.height=8}
+
+nmr_relabund_combined_summary = 
+  nmr_water_relabundance %>% 
+  mutate(extraction = "water") %>% 
+  bind_rows(nmr_spe_relabundance %>% mutate(extraction = "SPE")) %>% 
+  rename(sample_name = sampleID) %>% 
+  left_join(sample_key) %>% 
+  group_by(extraction, region, site, transect_location, horizon, group) %>% 
+  dplyr::summarise(relabund = mean(relabund))
+
+nmr_relabund_combined_summary %>% 
+  ggplot(aes(x = transect_location, y = relabund, fill = group))+
+  geom_bar(stat = "identity")+
+  facet_nested(extraction ~ site + horizon, scale = "free_x")+
+  theme(legend.position = "right")
+
+```
+
 
 ---
 
