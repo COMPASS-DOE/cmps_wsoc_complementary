@@ -1,0 +1,386 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      include = TRUE)
+```
+
+
+```{r}
+source("2-code/0-packages.R")
+targets::tar_load_everything()
+```
+
+## FTICR-MS
+
+### VAN KREVELEN
+
+```{r}
+gg_vankrev <- function(data,mapping){
+  ggplot(data,mapping) +
+    # plot points
+    geom_point(size=0.5, alpha = 0.5) + # set size and transparency
+    # axis labels
+    ylab("H/C") +
+    xlab("O/C") +
+    # axis limits
+    xlim(0,1.25) +
+    ylim(0,2.5) +
+    # add boundary lines for Van Krevelen regions
+    geom_segment(x = 0.0, y = 1.5, xend = 1.2, yend = 1.5,color="black",linetype="longdash") +
+    geom_segment(x = 0.0, y = 0.7, xend = 1.2, yend = 0.4,color="black",linetype="longdash") +
+    geom_segment(x = 0.0, y = 1.06, xend = 1.2, yend = 0.51,color="black",linetype="longdash") +
+    guides(colour = guide_legend(override.aes = list(alpha=1, size = 1)))
+}
+
+```
+
+Unique peak assignments for + vs. - mode
+```{r}
+# vk_domains = 
+lcms_metadata %>% 
+  gg_vankrev(aes(x = OC, y = HC, color = mode))+
+  theme_kp()+
+  facet_wrap(~mode)
+
+
+print("unique + vs - mode")
+lcms_metadata %>% 
+  filter(mode == "negative, positive") %>% 
+  ggplot(aes(x = OC, y = HC))+
+  geom_point(data = lcms_metadata %>% filter(mode != "negative, positive"),
+             aes(color = mode))+
+  #   geom_point(color = "grey", alpha = 0.8, size = 1) + # set size and transparency
+  # axis labels
+  ylab("H/C") +
+  xlab("O/C") +
+  # axis limits
+  xlim(0,1.25) +
+  ylim(0,2.5) +
+  # add boundary lines for Van Krevelen regions
+  geom_segment(x = 0.0, y = 1.5, xend = 1.2, yend = 1.5,color="black",linetype="longdash") +
+  geom_segment(x = 0.0, y = 0.7, xend = 1.2, yend = 0.4,color="black",linetype="longdash") +
+  geom_segment(x = 0.0, y = 1.06, xend = 1.2, yend = 0.51,color="black",linetype="longdash") +
+  guides(colour = guide_legend(override.aes = list(alpha=1, size = 2)))+
+  scale_color_manual(values = whistledown::whistledown_palette("queen", 3))
+
+
+```
+
+All identified peaks across the different samples
+
+```{r lcms_vk, fig.width=12, fig.height=9}
+
+lcms_data_trt %>% 
+  left_join(lcms_metadata) %>% 
+  gg_vankrev(aes(x = OC, y = HC, color = mode))+
+  facet_grid(horizon ~ region + transect_location)
+
+```
+
+
+
+
+### PERMANOVA
+
+```{r}
+adonis2(lcms_relabundance_wide %>% dplyr::select(where(is.numeric)) ~ 
+          (mode + region + transect_location + horizon),
+        by = "margin",
+        data = lcms_relabundance_wide) %>% 
+  knitr::kable()
+```
+PERMANOVA across all FTICR data showed that mode (positive vs. negative) accounted for 88% of overall variability/separation.
+
+
+So we split the data by mode for all subsequent analyses.
+```{r}
+adonis2(lcms_relabundance_wide %>% filter(mode == "negative") %>% 
+          dplyr::select(where(is.numeric)) ~ 
+          (region + transect_location + horizon),
+        by = "margin",
+        data = lcms_relabundance_wide %>% filter(mode == "negative")) %>% 
+  knitr::kable()
+```
+For negative mode, region accounted for 66 % and transect 25 % of total variability.
+
+
+```{r}
+adonis2(lcms_relabundance_wide %>% filter(mode == "positive") %>% 
+          dplyr::select(where(is.numeric)) ~ 
+          (region + transect_location + horizon),
+        by = "margin",
+        data = lcms_relabundance_wide %>% filter(mode == "positive")) %>% 
+  knitr::kable()
+```
+For positive mode, region accounted for 34 % and transect 23 % of total variability.
+
+
+
+### PCA
+
+```{r pca_function}
+fit_pca_function_lcms = function(dat, sample_key){
+  
+  relabund_pca =
+    dat %>% 
+    replace(.,is.na(.),0)
+  
+  num = 
+    relabund_pca %>% 
+    dplyr::select(where(is.numeric))
+  
+  grp = 
+    relabund_pca %>% 
+    dplyr::select(where(is.character)) %>% 
+    dplyr::mutate(row = row_number())
+  
+  pca_int = prcomp(num, scale. = T)
+  
+  list(num = num,
+       grp = grp,
+       pca_int = pca_int)
+  
+}
+```
+
+```{r}
+lcms_pca_positive = fit_pca_function_lcms(dat = lcms_relabundance_wide %>% filter(mode == "positive"))
+lcms_pca_negative = fit_pca_function_lcms(dat = lcms_relabundance_wide %>% filter(mode == "negative"))
+```
+
+```{r lcms_pca_biplot}
+ggbiplot(lcms_pca_positive$pca_int, obs.scale = 1, var.scale = 1,
+         groups = lcms_pca_positive$grp$region, 
+         ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
+  geom_point(size=3,stroke=1, alpha = 1,
+             aes(shape = lcms_pca_positive$grp$transect_location,
+                 color = groups))+
+  scale_shape_manual(breaks = c("upland", "transition", "wte", "wetland"),
+                     values = c(1,2,3,4))+
+  xlim(-4,4)+
+  ylim(-3.5,3.5)+
+  labs(color = "", shape = "",
+       title = "FTICR - PCA - positive mode")+
+  #   theme_kp()+
+  theme(legend.position = "top", legend.box = "vertical")+
+  NULL
+
+
+ggbiplot(lcms_pca_negative$pca_int, obs.scale = 1, var.scale = 1,
+         groups = lcms_pca_negative$grp$region, 
+         ellipse = TRUE, circle = FALSE, var.axes = TRUE, alpha = 0) +
+  geom_point(size=3,stroke=1, alpha = 1,
+             aes(shape = lcms_pca_negative$grp$transect_location,
+                 color = groups))+
+  scale_shape_manual(breaks = c("upland", "transition", "wte", "wetland"),
+                     values = c(1,2,3,4))+
+  xlim(-4,4)+
+  ylim(-3.5,3.5)+
+  labs(color = "", shape = "",
+       title = "FTICR - PCA - negative mode")+
+  #   theme_kp()+
+  theme(legend.position = "top", legend.box = "vertical")+
+  NULL
+
+
+```
+
+### NMDS
+
+```{r lcms_cluster_formula}
+library(cluster)
+library(factoextra)
+
+lcms_wide = 
+  lcms_data_trt %>% 
+  distinct(formula, sample_name, .keep_all = T) %>% 
+  dplyr::select(formula, intensity, sample_name, sample_type, region, site, transect_location, horizon, mode) %>% 
+  pivot_wider(names_from = "formula", values_from = "intensity") %>% 
+  janitor::remove_empty("cols") %>% 
+  replace(is.na(.), 0)
+
+df = fticr_wide %>%  dplyr::select(where(is.numeric))
+grp = fticr_wide %>%  dplyr::select(!where(is.numeric))
+
+
+```
+
+
+clustering and NMDS for NEGATIVE MODE
+
+```{r, include=FALSE}
+
+
+compute_clustering = function(dat){
+  
+  
+  df = dat %>%  dplyr::select(where(is.numeric))
+  grp = dat %>% dplyr::select(!where(is.numeric))
+  
+  
+  fviz_nbclust(df, FUN = hcut, method = "wss")
+  fviz_nbclust(df, FUN = hcut, method = "silhouette")
+  # two clusters
+  
+  d <- dist(df, method = "binary")
+  hc1 <- hclust(d, method = "complete" )
+  plot(hc1, cex = 0.6, hang = -1)
+  hc5 <- hclust(d, method = "ward.D2" )
+  sub_grp <- cutree(hc5, k = 3)
+  # table(sub_grp)
+  plot(hc5, cex = 0.6)
+  # rect.hclust(hc5, k = 5, border = 2:5)
+  
+  df_cl <- mutate(df, cluster = sub_grp) %>% cbind(grp)
+  
+  cluster = df_cl %>% dplyr::select(sample_type, cluster) %>% 
+    dplyr::mutate(row = row_number())
+  
+  
+  # print("hierarchical clustering: three clusters")
+  # count(df_cl,cluster)
+  
+}
+
+clusters_neg = compute_clustering(dat = fticr_wide %>% filter(mode == "negative"))
+clusters_pos = compute_clustering(dat = fticr_wide %>% filter(mode == "positive"))
+
+
+```
+
+
+
+
+```{r icr_mds_calc, include=FALSE}
+
+compute_nmds = function(dat, cluster){
+  
+  num = 
+    dat %>% 
+    #  column_to_rownames("sample_type") %>% 
+    dplyr::select(where(is.numeric)) %>%
+    dplyr::mutate(row = row_number()) %>% 
+    drop_na()
+  
+  num_row_numbers = num %>% dplyr::select(row)
+  
+  grp = 
+    dat %>% 
+    dplyr::select(!where(is.numeric)) %>% 
+    dplyr::mutate(row = row_number())
+  #  %>% 
+  #    right_join(num_row_numbers)
+  
+  set.seed(123456)
+  jacc = vegdist(num, method = "jaccard")
+  mds = metaMDS(jacc, k=3)
+  
+  #scores(mds)
+  
+  scores = 
+    as.data.frame(scores(mds)) %>% 
+    dplyr::mutate(row = row_number()) %>% 
+    # rownames_to_column("DOC_ID") %>% 
+    left_join(grp) %>% 
+    left_join(cluster)
+  
+  
+}
+
+
+mds_positive = compute_nmds(dat = fticr_wide %>% filter(mode == "positive"), cluster = clusters_pos)
+mds_negative = compute_nmds(dat = fticr_wide %>% filter(mode == "negative"), cluster = clusters_neg)
+
+
+```
+
+
+```{r icr_NMDS_plot}
+library(ggConvexHull)
+
+
+mds_positive %>% 
+  ggplot(aes(x = NMDS1, y = NMDS2,
+             color = transect_location,
+             shape = region, size = horizon))+
+  
+  #  geom_convexhull(
+  #                  aes(fill = as.character(cluster)), 
+  #                color = "black",
+  #                linewidth = 1.2,
+  #                alpha = 0.8)+
+  #  
+  geom_point()+
+  labs(title = "NMDS, positive mode")+
+  theme(legend.position = "right")
+#  scale_shape_manual(values = c(21, 22, 23))+
+#  scale_fill_manual(values = pnw_palette("Bay", 5))+
+# guides(fill = guide_legend(override.aes = list(shape = 21)))
+
+
+
+
+mds_negative %>% 
+  ggplot(aes(x = NMDS1, y = NMDS2,
+             color = transect_location,
+             shape = region, size = horizon))+
+  
+  #  geom_convexhull(
+  #                  aes(fill = as.character(cluster)), 
+  #                color = "black",
+  #                linewidth = 1.2,
+  #                alpha = 0.8)+
+  
+  geom_point()+
+  labs(title = "NMDS, negative mode")+
+  theme(legend.position = "right")
+
+#  scale_shape_manual(values = c(21, 22, 23))+
+#  scale_fill_manual(values = pnw_palette("Bay", 5))+
+# guides(fill = guide_legend(override.aes = list(shape = 21)))
+
+```
+
+
+### RELATIVE ABUNDANCE
+
+```{r icr_relabund, fig.width=12, fig.height=12}
+library(ggh4x)
+
+icr_relabundance_summary = 
+  icr_relabundance %>% 
+  group_by(region, transect_location, horizon, mode, Class) %>% 
+  dplyr::summarise(mean = mean(relabund))
+
+icr_relabundance_summary %>% 
+  ggplot(aes(x = transect_location, y = mean, fill = Class))+
+  geom_bar(stat = "identity")+
+  facet_nested(mode ~ region + horizon, scales = "free_x", space = "free_x",
+               nest_line = element_line(color = "grey"))
+```
+
+
+
+
+---
+
+
+---
+
+## Session Info 
+
+<details>
+  <summary> Session Info </summary>
+
+Date run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>
