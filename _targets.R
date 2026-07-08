@@ -17,6 +17,7 @@ tar_source("2-code/0-packages.R")
 tar_source("2-code/1a-fticr_functions.R")
 #tar_source("2-code/1b-fticr_data.R")
 tar_source("2-code/2-nmr.R")
+tar_source("2-code/3-lcms.R")
 # tar_source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
@@ -67,7 +68,14 @@ list(
   tar_target(icr_data_cores, icr_process_data_cores(icr_report_negative, icr_report_positive, sample_key)),
   
   tar_target(icr_relabundance, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance),
-  tar_target(icr_relabundance_wide, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance_wide)
+  tar_target(icr_relabundance_wide, compute_icr_relabund(icr_data_cores, icr_metadata)$icr_relabundance_wide),
+  
+  # LCMS
+  ## processing
+  tar_target(lcms_long_negative, read.csv("1-data/lcms/LCMS_NEG_long.csv")),
+  tar_target(lcms_long_positive, read.csv("1-data/lcms/LCMS_POS_long.csv")),
+  tar_target(lcms_long_combined, lcms_combine_long(lcms_long_neg, lcms_long_pos)),
+  tar_target(lcms_metadata, lcms_make_metadata(lcms_long_neg, lcms_long_pos))
   
 #  tar_render(report, path = "3-reports/report.Rmd")
 
