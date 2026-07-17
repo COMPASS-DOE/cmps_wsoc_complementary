@@ -75,8 +75,14 @@ list(
   tar_target(lcms_long_negative, read.csv("1-data/lcms/LCMS_NEG_long.csv")),
   tar_target(lcms_long_positive, read.csv("1-data/lcms/LCMS_POS_long.csv")),
   tar_target(lcms_long_combined, lcms_combine_long(lcms_long_neg, lcms_long_pos)),
-  tar_target(lcms_metadata, lcms_make_metadata(lcms_long_neg, lcms_long_pos))
+  tar_target(lcms_metadata, lcms_make_metadata(lcms_long_neg, lcms_long_pos)),
   
+  ## analysis
+  tar_target(lcms_relabund, lcms_compute_relabund(lcms_long_combined, lcms_metadata)),
+  tar_target(lcms_relabund_intensities_cores, lcms_relabund$relabund_intensities_ALL_CORES),
+  tar_target(lcms_relabund_intensities_treatment, lcms_relabund$relabund_intensities_TREATMENT),
+  tar_target(lcms_relabund_presence_cores, lcms_relabund$relabund_presence_ALL_CORES),
+  tar_target(lcms_relabund_presence_treatment, lcms_relabund$relabund_presence_TREATMENT)
 #  tar_render(report, path = "3-reports/report.Rmd")
 
 )

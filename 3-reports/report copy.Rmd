@@ -87,7 +87,7 @@ lcms_long_combined %>%
 
 ```{r}
 
-relabund_presence_ALL_CORES %>% 
+lcms_relabund_presence_cores %>% 
   ggplot(aes(x = orbitrap_id, y = rel_abund, fill = Class_detailed)) +
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~site, scales = "free_x", ncol = 6) +
@@ -98,7 +98,7 @@ relabund_presence_ALL_CORES %>%
     theme(legend.title = element_blank()) +
     theme(axis.text.x = element_text(angle = 90)) 
 
-relabund_presence_TREATMENT %>% 
+lcms_relabund_presence_treatment %>% 
   ggplot(aes(x = sample_type, y = mean, fill = Class_detailed)) +
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~site + mode, scales = "free_x", ncol = 6) +
@@ -109,7 +109,7 @@ relabund_presence_TREATMENT %>%
     theme(legend.title = element_blank()) +
     theme(axis.text.x = element_text(angle = 90)) 
 
-relabund_intensities_ALL_CORES %>% 
+lcms_relabund_intensities_cores %>% 
   ggplot(aes(x = orbitrap_id, y = rel_abund, fill = Class_detailed)) +
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~site, scales = "free_x", ncol = 6) +
@@ -121,7 +121,7 @@ relabund_intensities_ALL_CORES %>%
     theme(axis.text.x = element_text(angle = 90)) 
 
 
-relabund_intensities_TREATMENT %>% 
+lcms_relabund_intensities_treatment %>% 
   ggplot(aes(x = sample_type, y = mean, fill = Class_detailed)) +
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~site + mode, scales = "free_x", ncol = 6) +
