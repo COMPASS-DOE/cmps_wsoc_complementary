@@ -143,13 +143,34 @@ relabund_intensities_TREATMENT %>%
 ### PERMANOVA
 
 ```{r}
-adonis2(lcms_relabundance_wide %>% dplyr::select(where(is.numeric)) ~ 
-          (mode + region + transect_location + horizon),
+
+adonis2(wide_pos_formula %>% dplyr::select(where(is.numeric)) ~ 
+          (site + transect_location + horizon),
         by = "margin",
-        data = lcms_relabundance_wide) %>% 
+        data = wide_pos_formula) %>% 
   knitr::kable()
+
+# adonis2(wide_pos_features %>% dplyr::select(where(is.numeric)) ~ 
+#           (site + transect_location + horizon),
+#         by = "margin",
+#         data = wide_pos_formula) %>% 
+#   knitr::kable()
+
+adonis2(wide_neg_formula %>% dplyr::select(where(is.numeric)) ~ 
+          (site + transect_location + horizon),
+        by = "margin",
+        data = wide_pos_formula) %>% 
+  knitr::kable()
+
+# adonis2(wide_neg_features %>% dplyr::select(where(is.numeric)) ~ 
+#           (site + transect_location + horizon),
+#         by = "margin",
+#         data = wide_pos_formula) %>% 
+#   knitr::kable()
+
+## PERMANOVA BY FEATURES crashes the computer --> need to look into it
+
 ```
-PERMANOVA across all FTICR data showed that mode (positive vs. negative) accounted for 88% of overall variability/separation.
 
 
 So we split the data by mode for all subsequent analyses.
