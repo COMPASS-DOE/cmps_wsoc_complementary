@@ -171,6 +171,80 @@ adonis2(wide_neg_formula %>% dplyr::select(where(is.numeric)) ~
 ```
 
 
+### PCOA
+
+```{r}
+
+plot_lcms_pcoa = function(dat){
+  
+  pacman::p_load("BiocManager","ComplexHeatmap","dendextend","NbClust","cowplot",
+                 "gtools", # mixedsort
+                 "tidyverse",
+                 "janitor", # row_to_names function
+                 "factoextra", # PCA
+                 "vegan") # PCoA
+  
+  
+  df = dat %>% column_to_rownames("orbitrap_id") %>% dplyr::select(where(is.numeric))
+  grp = dat %>%  dplyr::select(!where(is.numeric))
+  
+  
+  # PCoA
+  distm <- vegdist(df, method = "bray", na.rm = FALSE) #compute distance
+  
+  PcoA <- cmdscale(distm, k = 2, eig = T, add = T)
+  
+  PcoA_points <- as.data.frame(PcoA$points) #getting the PCOs into dataframe
+  variance <- round(PcoA$eig*100/sum(PcoA$eig),1) # getting the variance explained by each PCo
+  names(PcoA_points)[1:2] <- c("PCoA1", "PCoA2")
+  
+  PcoA_points2 = PcoA_points %>% rownames_to_column("orbitrap_id") %>% left_join(grp)
+  
+  ggplot(PcoA_points2, 
+         aes(x = PCoA1, 
+             y = PCoA2,
+             colour = as.factor(sample_type), 
+             label = orbitrap_id)) +
+    geom_point(size=4, alpha = 1) +
+  #  geom_text_repel() +
+  #  scale_colour_manual(values = c('orange','darkgreen','red','blue','black','grey','purple', 'skyblue3','magenta','green')) +
+    xlab(paste('PCoA1',variance[1],'%', sep = ' ')) + 
+    ylab(paste('PCoA2',variance[2],'%', sep = ' ')) + 
+    labs(color = '') +
+    coord_fixed() +
+    theme(axis.text = element_text(size = 16),
+          axis.title = element_text(size = 16, face= 'bold'),
+          plot.title = element_text(size = 18, face= 'bold',hjust=0.5),
+          legend.title = element_text(size = 18, face= 'bold'),
+          legend.text = element_text(size = 16),
+          panel.background = element_blank(),
+          panel.border = element_rect(colour = "black", fill=NA, linewidth=1))
+  
+  
+}
+plot_lcms_pcoa(dat = wide_pos_features)
+plot_lcms_pcoa(dat = wide_neg_features)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 So we split the data by mode for all subsequent analyses.
 ```{r}
 adonis2(lcms_relabundance_wide %>% filter(mode == "negative") %>% 
