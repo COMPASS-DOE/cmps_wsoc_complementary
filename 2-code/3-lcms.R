@@ -80,14 +80,124 @@ lcms_compute_relabund = function(lcms_long_combined, lcms_metadata){
 
 lcms_wide = function(lcms_long_combined){
   
-  wide_pos = 
+  wide_pos_features = 
     lcms_long_combined %>% 
     filter(mode == "positive") %>% 
-    pivot_wider(names_from = "feature", values_from = "intensity")
+    dplyr::select(-formula) %>% 
+    pivot_wider(names_from = "feature", values_from = "intensity") %>% 
+    replace(is.na(.), 0)
   
+  wide_pos_formula = 
+    lcms_long_combined %>% 
+    filter(mode == "positive") %>%
+    distinct(formula, orbitrap_id, sample_type, site, transect_location, horizon) %>% 
+    mutate(presence = 1) %>%  
+    pivot_wider(names_from = "formula", values_from = "presence") %>% 
+    replace(is.na(.), 0)
+  
+  wide_neg_features = 
+    lcms_long_combined %>% 
+    filter(mode == "negative") %>% 
+    dplyr::select(-formula) %>% 
+    pivot_wider(names_from = "feature", values_from = "intensity") %>% 
+    replace(is.na(.), 0)
+  
+  wide_neg_formula = 
+    lcms_long_combined %>% 
+    filter(mode == "negative") %>%
+    distinct(formula, orbitrap_id, sample_type, site, transect_location, horizon) %>% 
+    mutate(presence = 1) %>%  
+    pivot_wider(names_from = "formula", values_from = "presence") %>% 
+    replace(is.na(.), 0)
+  
+  list(wide_pos_features = wide_pos_features,
+       wide_pos_formula = wide_pos_formula,
+       wide_neg_features = wide_neg_features,
+       wide_neg_formula = wide_neg_formula)
+}
+
+
+pcoa = function(){
+  
+  pacman::p_load("BiocManager","ComplexHeatmap","dendextend","NbClust","cowplot",
+                 "gtools", # mixedsort
+                 "tidyverse",
+                 "janitor", # row_to_names function
+                 "factoextra", # PCA
+                 "vegan") # PCoA
+  
+  md_sub <- wide_neg_features
+  
+  # use imp0 to filter out all zero features
+  
+  #norm_mean2 <- norm_tic[which(rownames(norm_tic) %in% rownames(md_sub)), , drop = F]
+  
+  filter_all_zero_features <- function(data){
+    # Remove columns where all values are NA
+    data <- data[, colSums(data) > 0]
+    return(data)
+  }
+  
+  norm_mean3 <- filter_all_zero_features(md_sub)
+  
+  cleaned_data <- norm_mean3
+  md <- md_sub %>% column_to_rownames("orbitrap_id")
+  
+  # Verifying file consistency----------------------------------------------------
+  md <- md[mixedorder(rownames(md)), ,drop=F] # ordering the md by row names
+  #cleaned_data <- cleaned_data[mixedorder(rownames(cleaned_data)),, drop=F] # ordering the md by row names
+  cleaned_data = md
+  
+  identical(rownames(cleaned_data), rownames(md))
+  
+  # which file names in the metadata are not in the feature table?
+  setdiff(rownames(cleaned_data), rownames(md))
+  
+  table(rownames(md) %in% rownames(cleaned_data))
+  
+  ################################################################################
+  
+  # PCoA
+  distm <- vegdist(cleaned_data, method = "bray", na.rm = FALSE) #compute distance
+  
+  PcoA <- cmdscale(distm, k = 2, eig = T, add = T)
+  
+  PcoA_points <- as.data.frame(PcoA$points) #getting the PCOs into dataframe
+  variance <- round(PcoA$eig*100/sum(PcoA$eig),1) # getting the variance explained by each PCo
+  names(PcoA_points)[1:2] <- paste0('PCoA', seq(1,2)) 
+  
+  colnames(md)
+  interested_attribute_pcoa = 'sample_type'
+  
+  key = read.csv("1-data/lcms/orbitrap_sample_key.csv")
+  
+  PcoA_points = PcoA_points %>% rownames_to_column("orbitrap_id") %>% left_join(key)
+  md = md %>% rownames_to_column("orbitrap_id") %>% left_join(key)
+  
+  
+  ggplot(PcoA_points, 
+         aes(x = PCoA1, 
+             y = PCoA2,
+             colour = as.factor(md[,interested_attribute_pcoa]), 
+             label = PcoA_points$plot_id)) +
+    geom_point(size=2.5, alpha = 0.5) +
+    #geom_text_repel() +
+    scale_colour_manual(values = c('orange','darkgreen','red','blue','black','grey','purple', 'skyblue3','magenta','green')) +
+    xlab(paste('PCoA1',variance[1],'%', sep = ' ')) + 
+    ylab(paste('PCoA2',variance[2],'%', sep = ' ')) + 
+    labs(color = '') +
+    coord_fixed() +
+    theme(axis.text = element_text(size = 16),
+          axis.title = element_text(size = 16, face= 'bold'),
+          plot.title = element_text(size = 18, face= 'bold',hjust=0.5),
+          legend.title = element_text(size = 18, face= 'bold'),
+          legend.text = element_text(size = 16),
+          panel.background = element_blank(),
+          panel.border = element_rect(colour = "black", fill=NA, linewidth=1))
   
   
 }
+
 
 # -------------------------------------------------------------------------
 # -------------------------------------------------------------------------

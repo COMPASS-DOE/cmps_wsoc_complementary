@@ -150,11 +150,11 @@ adonis2(wide_pos_formula %>% dplyr::select(where(is.numeric)) ~
         data = wide_pos_formula) %>% 
   knitr::kable()
 
-# adonis2(wide_pos_features %>% dplyr::select(where(is.numeric)) ~ 
-#           (site + transect_location + horizon),
-#         by = "margin",
-#         data = wide_pos_formula) %>% 
-#   knitr::kable()
+ adonis2(wide_pos_features %>% dplyr::select(where(is.numeric)) ~ 
+           (site + transect_location + horizon),
+         by = "margin",
+         data = wide_pos_formula) %>% 
+   knitr::kable()
 
 adonis2(wide_neg_formula %>% dplyr::select(where(is.numeric)) ~ 
           (site + transect_location + horizon),
@@ -162,13 +162,11 @@ adonis2(wide_neg_formula %>% dplyr::select(where(is.numeric)) ~
         data = wide_pos_formula) %>% 
   knitr::kable()
 
-# adonis2(wide_neg_features %>% dplyr::select(where(is.numeric)) ~ 
-#           (site + transect_location + horizon),
-#         by = "margin",
-#         data = wide_pos_formula) %>% 
-#   knitr::kable()
-
-## PERMANOVA BY FEATURES crashes the computer --> need to look into it
+ adonis2(wide_neg_features %>% dplyr::select(where(is.numeric)) ~ 
+           (site + transect_location + horizon),
+         by = "margin",
+         data = wide_pos_formula) %>% 
+   knitr::kable()
 
 ```
 
