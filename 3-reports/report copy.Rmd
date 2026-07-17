@@ -75,12 +75,67 @@ All identified peaks across the different samples
 
 ```{r lcms_vk, fig.width=12, fig.height=9}
 
-lcms_data_trt %>% 
+lcms_long_combined %>% 
   left_join(lcms_metadata) %>% 
   gg_vankrev(aes(x = OC, y = HC, color = mode))+
-  facet_grid(horizon ~ region + transect_location)
+  facet_grid(horizon ~ site + transect_location)
 
 ```
+
+
+### relabund
+
+```{r}
+
+relabund_presence_ALL_CORES %>% 
+  ggplot(aes(x = orbitrap_id, y = rel_abund, fill = Class_detailed)) +
+    geom_bar(stat = "identity", position = "stack") +
+    facet_wrap(~site, scales = "free_x", ncol = 6) +
+    labs(x = "",
+         y = "Relative abundance (%)")+
+    scale_fill_brewer(palette = "RdYlBu") +
+    theme_bw() +
+    theme(legend.title = element_blank()) +
+    theme(axis.text.x = element_text(angle = 90)) 
+
+relabund_presence_TREATMENT %>% 
+  ggplot(aes(x = sample_type, y = mean, fill = Class_detailed)) +
+    geom_bar(stat = "identity", position = "stack") +
+    facet_wrap(~site + mode, scales = "free_x", ncol = 6) +
+    labs(x = "",
+         y = "Relative abundance (%)")+
+    scale_fill_brewer(palette = "RdYlBu") +
+    theme_bw() +
+    theme(legend.title = element_blank()) +
+    theme(axis.text.x = element_text(angle = 90)) 
+
+relabund_intensities_ALL_CORES %>% 
+  ggplot(aes(x = orbitrap_id, y = rel_abund, fill = Class_detailed)) +
+    geom_bar(stat = "identity", position = "stack") +
+    facet_wrap(~site, scales = "free_x", ncol = 6) +
+    labs(x = "",
+         y = "Relative abundance (%)")+
+    scale_fill_brewer(palette = "RdYlBu") +
+    theme_bw() +
+    theme(legend.title = element_blank()) +
+    theme(axis.text.x = element_text(angle = 90)) 
+
+
+relabund_intensities_TREATMENT %>% 
+  ggplot(aes(x = sample_type, y = mean, fill = Class_detailed)) +
+    geom_bar(stat = "identity", position = "stack") +
+    facet_wrap(~site + mode, scales = "free_x", ncol = 6) +
+    labs(x = "",
+         y = "Relative abundance (%)")+
+    scale_fill_brewer(palette = "RdYlBu") +
+    theme_bw() +
+    theme(legend.title = element_blank()) +
+    theme(axis.text.x = element_text(angle = 90)) 
+
+
+```
+
+
 
 
 

@@ -9,11 +9,11 @@ lcms_combine_long = function(lcms_long_pos, lcms_long_neg){
     lcms_long_neg %>% 
     mutate(mode = "negative") %>% 
     bind_rows(lcms_long_pos %>% mutate(mode = "positive")) %>% 
-    dplyr::select(feature, formula, intensity, sample_name, orbitrap_id, sample_type, site, transect_location, horizon)
+    dplyr::select(mode, feature, formula, intensity, sample_name, orbitrap_id, sample_type, site, transect_location, horizon)
   
   combined_trt = 
     combined %>% 
-    dplyr::select(-feature, -intensity) %>% 
+    #dplyr::select(-feature, -intensity) %>% 
     distinct()
   
 }
@@ -32,24 +32,62 @@ lcms_make_metadata = function(lcms_long_pos, lcms_long_neg){
 }
 
 lcms_compute_relabund = function(lcms_long_combined, lcms_metadata){
+  ## two different ways to calculate relative abundance
   
-  ra_id <- 
+  ## 1. based on intensities - sum all intensities within each molecular class
+  ## do this for each core, then summarize by treatment
+  relabund_intensities_ALL_CORES <- 
     lcms_long_combined %>%
-    group_by(sample_type, site, transect_location, horizon, Class_detailed) %>%
+    left_join(lcms_metadata) %>% 
+    group_by(mode, orbitrap_id, sample_type, site, transect_location, horizon, Class_detailed) %>%
     dplyr::summarize(inten = sum(intensity, na.rm = TRUE), .groups = "drop") %>%
-    group_by(sample_name, orbitrap_id, sample_type, site) %>%
+    group_by(mode, orbitrap_id) %>%
     dplyr::mutate(total = sum(inten)) %>%
     mutate(rel_abund = (inten/total)*100) %>%
-    ungroup() %>%
-    mutate(Class_chem = factor(Class_chem, levels = c("lipid", "amino sugar", "protein", "carbohydrate", "unsatHC", "lignin", "tannin", "condensed HC", "other"))) %>%
-    mutate(short_id = str_extract_all(orbitrap_id, "C\\d+")) %>%
-    mutate(short_id = str_extract_all(short_id, "\\d+")) %>%
-    mutate(short_id = ifelse(short_id %in% c(1:9), gsub("C", "C0", orbitrap_id), orbitrap_id)) %>%
-    rename(plot_id = short_id)
+    ungroup()
+  
+  relabund_intensities_TREATMENT = 
+    relabund_intensities_ALL_CORES %>% 
+    group_by(mode, sample_type, site, transect_location, horizon, Class_detailed) %>% 
+    dplyr::summarize(mean = mean(rel_abund, na.rm = TRUE), .groups = "drop") %>% 
+    ungroup()
+  
+  ## 2. based on presence/absence of molecular assignments
+  ## do this for each core, then summarize by treatment
+  relabund_presence_ALL_CORES <- 
+    lcms_long_combined %>%
+    mutate(presence = 1) %>% 
+    distinct(mode, formula, orbitrap_id, sample_type, site, transect_location, horizon, presence) %>% 
+    left_join(lcms_metadata) %>% 
+    group_by(mode, orbitrap_id, sample_type, site, transect_location, horizon, Class_detailed) %>%
+    dplyr::summarize(inten = sum(presence, na.rm = TRUE), .groups = "drop") %>%
+    group_by(mode, orbitrap_id) %>%
+    dplyr::mutate(total = sum(inten)) %>%
+    mutate(rel_abund = (inten/total)*100) %>%
+    ungroup()
+  
+  relabund_presence_TREATMENT = 
+    relabund_presence_ALL_CORES %>% 
+    group_by(mode, sample_type, site, transect_location, horizon, Class_detailed) %>% 
+    dplyr::summarize(mean = mean(rel_abund, na.rm = TRUE), .groups = "drop") %>% 
+    ungroup()
+  
+  list(relabund_intensities_ALL_CORES = relabund_intensities_ALL_CORES,
+       relabund_intensities_TREATMENT = relabund_intensities_TREATMENT,
+       relabund_presence_ALL_CORES = relabund_presence_ALL_CORES,
+       relabund_presence_TREATMENT = relabund_presence_TREATMENT)
+}
+
+lcms_wide = function(lcms_long_combined){
+  
+  wide_pos = 
+    lcms_long_combined %>% 
+    filter(mode == "positive") %>% 
+    pivot_wider(names_from = "feature", values_from = "intensity")
+  
   
   
 }
-
 
 # -------------------------------------------------------------------------
 # -------------------------------------------------------------------------
